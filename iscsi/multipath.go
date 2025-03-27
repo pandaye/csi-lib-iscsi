@@ -36,7 +36,7 @@ func ExecWithTimeout(command string, args []string, timeout time.Duration) ([]by
 
 	if err != nil {
 		var ee *exec.ExitError
-		if ok := errors.Is(err, ee); ok {
+		if ok := errors.As(err, &ee); ok {
 			klog.V(2).Infof("Non-zero exit code: %s\n", err)
 			err = fmt.Errorf("%s", ee.Stderr)
 		}
